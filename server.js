@@ -24,7 +24,7 @@ app.set("view engine", "handlebars");
 
 mongoose.connect("mongodb://localhost/mongoscraperdb", { useNewUrlParser: true });
 
-require("./routes/apiRoutes")(app);
+// require("./routes/apiRoutes")(app);
 require("./routes/htmlRoutes")(app);
 
 app.listen(PORT, function() {

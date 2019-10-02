@@ -3,6 +3,30 @@ let axios = require("axios");
 let cheerio = require("cheerio");
 
 module.exports = function(app) {
+    app.get("/", function(req, res) {
+        db.Article.find({})
+            .then(function(results) {
+                // If we were able to successfully find Articles, send them back to the client
+                let hbsObject = {
+                    articles: results
+                };
+        
+                // console.log(hbsObject);
+        
+                res.render("index", hbsObject);
+                // res.json(results);
+            }).catch(function(error) {
+            // If an error occurred, send it to the client
+            res.json(error);
+        });
+
+        // res.render("index");
+
+
+
+
+    });
+
     app.get("/scrape", function(req, res) {
         axios.get("https://www.nytimes.com/section/us").then(function(response) {
             let $ = cheerio.load(response.data);
@@ -21,12 +45,12 @@ module.exports = function(app) {
                     console.log(result);
 
                     db.Article.create(result)
-                    .then(function(dbArticle) {
-                        // View the added result in the console
-                        console.log(dbArticle);
-                    }).catch(function(error) {
-                        // If an error occurred, log it
-                        console.log(error);
+                        .then(function(dbArticle) {
+                            // View the added result in the console
+                            console.log(dbArticle);
+                        }).catch(function(error) {
+                            // If an error occurred, log it
+                            console.log(error);
                     });
                 };
 

@@ -6,8 +6,8 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
-            <a class="nav-item nav-link active" href="/">Home <span class="sr-only">(current)</span></a>
-            <a class="nav-item nav-link" href="/saved">Saved Articles</a>
+            <a class="nav-item nav-link" href="/">Home</a>
+            <a class="nav-item nav-link active" href="/saved">Saved Articles <span class="sr-only">(current)</span></a>
             <button class="nav-item btn btn-secondary scrape-latest">SCRAPE LATEST ARTICLES</button>
             <button class="nav-item btn clear">CLEAR ARTICLES</button>
         </div>
@@ -17,14 +17,17 @@
 
 <div class="container-fluid">
     {{#each articles}}
-        {{#unless saved}}
+        {{#if saved}}
             <div class="card">
                 <h4 class="card-header">
                     <a href={{link}}>
                         {{title}}
                     </a>
-                    <button class="btn btn-success save" data-id="{{_id}}">
-                        Save Article
+                    <button class="btn btn-danger unsave" data-id="{{_id}}">
+                        Unsave Article
+                    </button>
+                    <button class="btn btn-primary note" data-id="{{_id}}">
+                        Notes
                     </button>
 
                 </h4>
@@ -35,7 +38,7 @@
 
             </div>
             <br>
-        {{/unless}}
+        {{/if}}
     {{/each}}
 
 </div>

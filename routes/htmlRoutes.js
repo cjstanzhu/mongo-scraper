@@ -24,6 +24,26 @@ module.exports = function(app) {
 
     });
 
+    app.get("/saved", function(req, res) {
+        db.Article.find({})
+            .then(function(results) {
+                let hbsObject = {
+                    articles: results
+                };
+        
+                // console.log(hbsObject);
+        
+                res.render("saved", hbsObject);
+                // res.json(results);
+            }).catch(function(error) {
+            // If an error occurred, send it to the client
+            res.json(error);
+        });
+
+        // res.render("index");
+
+    });
+
     app.get("/scrape", function(req, res) {
         axios.get("https://www.nytimes.com/section/us").then(function(response) {
             let $ = cheerio.load(response.data);

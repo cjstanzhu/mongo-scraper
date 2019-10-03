@@ -4,6 +4,7 @@ $(function() {
 
         $.get("/scrape").then(function(response) {
             location.reload();
+            // location.redirect("/");
         });
 
     });
@@ -28,7 +29,16 @@ $(function() {
             
     });
 
+    $(".unsave").on("click", function(event) {
+        event.preventDefault();
+        let idInput = $(this).data("id");
 
+        $.ajax(`/api/unsave/${idInput}`, {type: "PUT"})
+            .then(function() {
+                location.reload();
+            });
+            
+    });
 
 
 

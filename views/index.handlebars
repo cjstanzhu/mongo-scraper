@@ -16,23 +16,25 @@
 
 <div class="container-fluid">
     {{#each articles}}
-        <div class="card">
-            <h4 class="card-header">
-                <a href={{link}}>
-                    {{title}}
-                </a>
-                <button class="btn btn-success">
-                    Save Article
-                </button>
+        {{#unless saved}}
+            <div class="card">
+                <h4 class="card-header">
+                    <a href={{link}}>
+                        {{title}}
+                    </a>
+                    <button class="btn btn-success save" data-id="{{_id}}">
+                        Save Article
+                    </button>
 
-            </h4>
+                </h4>
 
-            <div class="card-body">
-                {{summary}}
+                <div class="card-body">
+                    {{summary}}
+                </div>
+
             </div>
-
-        </div>
-        <br>
+            <br>
+        {{/unless}}
     {{/each}}
 
 </div>

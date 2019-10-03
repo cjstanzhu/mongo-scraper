@@ -22,9 +22,6 @@ module.exports = function(app) {
 
         // res.render("index");
 
-
-
-
     });
 
     app.get("/scrape", function(req, res) {
@@ -57,11 +54,24 @@ module.exports = function(app) {
             });
 
             // Send a message to the client
-            res.send("Scrape Complete");
+            // res.send("Scrape Complete");
+            res.redirect("/");
         });
     });
 
-
+    app.get("/clear", function(req, res) {
+        db.Article.remove({}, function(error, response) {
+            // Log any errors to the console
+            if (error) {
+                console.log(error);
+                res.send(error);
+            } else {
+                // console.log(response);
+                // res.send(response);
+                res.redirect("/");
+            };
+        });
+    });
 
 
 

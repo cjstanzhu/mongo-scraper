@@ -59,9 +59,12 @@ module.exports = function(app) {
                 result.link = $(element).find("a").attr("href");
 
                 if (result.title && result.summary && result.link) {
-                    console.log(result);
+                    // console.log(result);
 
-                    db.Article.create(result)
+                    let newArticle = new db.Article(result);
+                    newArticle.fullLink();
+
+                    db.Article.create(newArticle)
                         .then(function(dbArticle) {
                             // View the added result in the console
                             console.log(dbArticle);

@@ -33,6 +33,12 @@ let ArticleSchema = new Schema({
     ]
 });
 
+ArticleSchema.methods.fullLink = function() {
+    this.link = `https://www.nytimes.com${this.link}`;
+    
+    return this.link;
+};
+
 let Article = mongoose.model("Article", ArticleSchema);
 
 module.exports = Article;

@@ -75,7 +75,8 @@ module.exports = function(app) {
 
             // Send a message to the client
             // res.send("Scrape Complete");
-            res.redirect("/");
+            // res.redirect("/");
+            res.status(200).end();
         });
     });
 
@@ -88,14 +89,46 @@ module.exports = function(app) {
             } else {
                 // console.log(response);
                 // res.send(response);
-                res.redirect("/");
+                // res.redirect("/");
+                // res.status(200).end();
+
+                db.Note.remove({}, function(error, response) {
+                    if (error) {
+                        console.log(error);
+                        res.send(error);
+                    } else {
+                        res.status(200).end();
+                    };
+                });
+
             };
         });
+
+
+
+        
+
+
+
+
     });
 
 
-
-
+    //testing populated...
+    app.get("/populated", function(req, res) {
+        // Using our Library model, "find" every library in our db and populate them with any associated books
+        db.Article.find({})
+          // Specify that we want to populate the retrieved libraries with any associated books
+          .populate("notes")
+          .then(function(dbArticle) {
+            // If any Libraries are found, send them to the client with any associated Books
+            res.json(dbArticle);
+          })
+          .catch(function(error) {
+            // If an error occurs, send it back to the client
+            res.json(error);
+          });
+      });
 
 
 

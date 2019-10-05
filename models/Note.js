@@ -3,9 +3,9 @@ let mongoose = require("mongoose");
 let Schema = mongoose.Schema;
 
 let NoteSchema = new Schema({
-    // title: String,
     body: {
         type: String,
+        trim: true,
         required: true
     }
 });

@@ -4,7 +4,7 @@ $(function() {
 
         $.get("/scrape").then(function(response) {
             location.reload();
-            // location.redirect("/");
+
         });
 
     });
@@ -20,23 +20,25 @@ $(function() {
 
     $(".save").on("click", function(event) {
         event.preventDefault();
+
         let idInput = $(this).data("id");
 
-        $.ajax(`/api/saved/${idInput}`, {type: "PUT"})
-            .then(function() {
-                location.reload();
-            });
+        $.ajax(`/api/saved/${idInput}`, {type: "PUT"}).then(function() {
+            location.reload();
+
+        });
             
     });
 
     $(".unsave").on("click", function(event) {
         event.preventDefault();
+
         let idInput = $(this).data("id");
 
-        $.ajax(`/api/unsave/${idInput}`, {type: "PUT"})
-            .then(function() {
-                location.reload();
-            });
+        $.ajax(`/api/unsave/${idInput}`, {type: "PUT"}).then(function() {
+            location.reload();
+
+        });
             
     });
 
@@ -49,10 +51,6 @@ $(function() {
         $("#save-note").attr("data-id", idInput);
         
         $.get(`/api/saved/${idInput}`).then(function(response) {
-            // console.log(response);
-            console.log(response.notes);
-
-            // $("#testP").text(response.notes[0].body);
             response.notes.forEach(function(note) {
                 $("#modalBody").append(
                     `<div>
@@ -76,10 +74,12 @@ $(function() {
 
         };
 
-        $.post(`/api/saved/${idInput}`, newNote)
-            .then(function(response) {
-                location.reload();
-            });
+        $.post(`/api/saved/${idInput}`, newNote).then(function(response) {
+            location.reload();
+
+        });
+
+        $("#note-input").val("");
             
     });
 
@@ -88,15 +88,12 @@ $(function() {
         event.preventDefault();
 
         let idInput = $(this).data("id");
-        // console.log(idInput);
 
         $.get(`/api/delete/${idInput}`).then(function(response) {
             location.reload();
         });
 
-
     });
 
-    
 });
 

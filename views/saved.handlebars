@@ -16,24 +16,36 @@
 <br>
 
 <div class="container-fluid">
+    <div class="row">
+        <div class="col-12 text-center">
+            <h1>🗞Saved Articles🗞</h1>
+        </div>
+    </div>
+    <hr>
+    <br>
+
     {{#each articles}}
         {{#if saved}}
             <div class="card">
-                <h4 class="card-header">
+                <h5 class="card-header">
                     <a href={{link}}>
                         {{title}}
                     </a>
                     <button class="btn btn-danger unsave float-right" data-id="{{_id}}">
                         Unsave Article
                     </button>
-                    <button class="btn btn-primary note float-right" data-id="{{_id}}">
+                    {{!-- <button class="btn btn-warning note float-right" data-id="{{_id}}">
                         Notes
-                    </button>
+                    </button> --}}
 
-                </h4>
+                </h5>
 
                 <div class="card-body">
-                    {{summary}}
+                    <p>{{summary}}</p>
+                    <button class="btn btn-warning note float-right" data-id="{{_id}}">
+                        Notes
+                    </button>
+                    
                 </div>
 
             </div>
